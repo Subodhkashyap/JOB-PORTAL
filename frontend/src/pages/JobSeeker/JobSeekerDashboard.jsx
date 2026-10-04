@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 
 import {
@@ -148,6 +149,35 @@ const JobSeekerDashboard = () => {
   ]);
 
   // ============================================================
+  // SORT + CLEAN JOB TITLES
+  // ============================================================
+
+  const displayedJobs = [...jobs]
+    .sort((a, b) => {
+      const dateA = new Date(a?.createdAt || 0).getTime();
+      const dateB = new Date(b?.createdAt || 0).getTime();
+
+      return dateB - dateA;
+    })
+    .map((job) => ({
+      ...job,
+
+      // Remove trailing numbers such as:
+      // "Software Engineer - 1"
+      // "Frontend Developer - 2"
+      // "Full Stack Developer - 15"
+      //
+      // Result:
+      // "Software Engineer"
+      // "Frontend Developer"
+      // "Full Stack Developer"
+      title:
+        typeof job?.title === "string"
+          ? job.title.replace(/\s*-\s*\d+\s*$/, "").trim()
+          : job?.title,
+    }));
+
+  // ============================================================
   // FILTER HANDLERS
   // ============================================================
 
@@ -253,24 +283,17 @@ const JobSeekerDashboard = () => {
 
     return (
       <div className="fixed inset-0 z-[9999] lg:hidden">
-
         {/* BACKDROP */}
-
         <div
           className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"
           onClick={() => setShowMobileFilters(false)}
         />
 
         {/* DRAWER */}
-
         <div className="absolute top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col">
-
           {/* HEADER */}
-
           <div className="shrink-0 flex items-center justify-between px-5 py-5 border-b bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50">
-
             <div className="flex items-center gap-3">
-
               <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg">
                 <Filter className="w-5 h-5 text-white" />
               </div>
@@ -284,7 +307,6 @@ const JobSeekerDashboard = () => {
                   Refine your search
                 </p>
               </div>
-
             </div>
 
             <button
@@ -294,13 +316,10 @@ const JobSeekerDashboard = () => {
             >
               <X className="w-5 h-5" />
             </button>
-
           </div>
 
           {/* FILTER CONTENT */}
-
           <div className="flex-1 overflow-y-auto p-5">
-
             <FilterContent
               toggleSection={toggleSection}
               clearAllFilters={clearAllFilters}
@@ -308,23 +327,18 @@ const JobSeekerDashboard = () => {
               filters={filters}
               handleFilterChange={handleFilterChange}
             />
-
           </div>
 
           {/* FOOTER */}
-
           <div className="shrink-0 p-5 border-t bg-white">
-
             <button
               type="button"
               onClick={() => setShowMobileFilters(false)}
               className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold shadow-lg hover:shadow-xl transition"
             >
-              Show {jobs.length} Jobs
+              Show {displayedJobs.length} Jobs
             </button>
-
           </div>
-
         </div>
       </div>
     );
@@ -344,13 +358,8 @@ const JobSeekerDashboard = () => {
 
   return (
     <div className="relative min-h-screen bg-[#f4f7ff]">
-
-      {/* ======================================================
-          BACKGROUND GLOW
-      ====================================================== */}
-
+      {/* BACKGROUND GLOW */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-
         <div className="absolute -top-60 -left-60 w-[700px] h-[700px] rounded-full bg-blue-400/20 blur-[160px]" />
 
         <div className="absolute -top-60 -right-60 w-[700px] h-[700px] rounded-full bg-purple-400/20 blur-[160px]" />
@@ -358,65 +367,40 @@ const JobSeekerDashboard = () => {
         <div className="absolute top-[35%] left-[35%] w-[500px] h-[500px] rounded-full bg-cyan-300/10 blur-[150px]" />
 
         <div className="absolute bottom-[-250px] right-[-100px] w-[650px] h-[650px] rounded-full bg-pink-300/10 blur-[160px]" />
-
       </div>
 
-      {/* ======================================================
-          NAVBAR
-      ====================================================== */}
-
+      {/* NAVBAR */}
       <Navbar />
 
-      {/* ======================================================
-          PAGE CONTENT
-      ====================================================== */}
-
+      {/* PAGE CONTENT */}
       <main className="relative pt-24 pb-16">
-
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* ==================================================
-              HERO
-          ================================================== */}
-
+          {/* HERO */}
           <section className="relative overflow-hidden rounded-[30px] mb-7 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 shadow-[0_25px_80px_rgba(79,70,229,0.25)]">
-
-            {/* GLOW */}
-
             <div className="absolute -top-40 -right-20 w-[500px] h-[500px] rounded-full bg-white/10 blur-[100px]" />
 
             <div className="absolute -bottom-60 left-1/3 w-[600px] h-[600px] rounded-full bg-cyan-300/10 blur-[130px]" />
-
-            {/* DECORATIVE CIRCLES */}
 
             <div className="absolute top-8 right-10 w-20 h-20 rounded-full border border-white/10" />
 
             <div className="absolute bottom-8 right-32 w-10 h-10 rounded-full border border-white/10" />
 
             <div className="relative px-6 sm:px-8 lg:px-10 py-8">
-
               {/* BADGE */}
-
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-white text-xs sm:text-sm font-semibold">
-
                 <Sparkles className="w-4 h-4" />
 
                 Find your next opportunity
 
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
-
               </div>
 
               {/* TITLE */}
-
               <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-
                 Find Your{" "}
-
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-white to-purple-200">
                   Dream Job
                 </span>
-
               </h1>
 
               <p className="mt-3 text-blue-100 max-w-2xl text-sm sm:text-base">
@@ -425,63 +409,45 @@ const JobSeekerDashboard = () => {
               </p>
 
               {/* SEARCH */}
-
               <div className="mt-7 bg-white/95 backdrop-blur-xl rounded-2xl p-2 shadow-2xl border border-white/50">
-
                 <SearchHeader
                   filters={filters}
                   handleFilterChange={handleFilterChange}
                 />
-
               </div>
 
               {/* STATS */}
-
               <div className="flex flex-wrap gap-3 mt-5">
-
                 <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 border border-white/15 backdrop-blur-md text-white">
-
                   <BriefcaseBusiness className="w-4 h-4" />
 
                   <span className="text-sm font-semibold">
-                    {jobs.length}+ Jobs
+                    {displayedJobs.length}+ Jobs
                   </span>
-
                 </div>
 
                 <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 border border-white/15 backdrop-blur-md text-white">
-
                   <TrendingUp className="w-4 h-4" />
 
                   <span className="text-sm font-semibold">
                     New Opportunities
                   </span>
-
                 </div>
 
                 <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 border border-white/15 backdrop-blur-md text-white">
-
                   <MapPin className="w-4 h-4" />
 
                   <span className="text-sm font-semibold">
                     Remote & On-site
                   </span>
-
                 </div>
-
               </div>
-
             </div>
           </section>
 
-          {/* ==================================================
-              TRUST CARDS
-          ================================================== */}
-
+          {/* TRUST CARDS */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-7">
-
             <div className="bg-white/85 backdrop-blur-xl rounded-2xl border border-white shadow-sm p-4 flex items-center gap-3 hover:-translate-y-1 transition">
-
               <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
                 <ShieldCheck className="w-5 h-5" />
               </div>
@@ -495,11 +461,9 @@ const JobSeekerDashboard = () => {
                   Trusted job listings
                 </p>
               </div>
-
             </div>
 
             <div className="bg-white/85 backdrop-blur-xl rounded-2xl border border-white shadow-sm p-4 flex items-center gap-3 hover:-translate-y-1 transition">
-
               <div className="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
                 <Zap className="w-5 h-5" />
               </div>
@@ -513,11 +477,9 @@ const JobSeekerDashboard = () => {
                   Apply in a few clicks
                 </p>
               </div>
-
             </div>
 
             <div className="bg-white/85 backdrop-blur-xl rounded-2xl border border-white shadow-sm p-4 flex items-center gap-3 hover:-translate-y-1 transition">
-
               <div className="w-11 h-11 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center">
                 <Users className="w-5 h-5" />
               </div>
@@ -531,33 +493,18 @@ const JobSeekerDashboard = () => {
                   Grow your career
                 </p>
               </div>
-
             </div>
-
           </div>
 
-          {/* ==================================================
-              MAIN CONTENT
-          ================================================== */}
-
+          {/* MAIN CONTENT */}
           <div className="flex flex-col lg:flex-row gap-7 items-start">
-
-            {/* =================================================
-                FILTER SIDEBAR
-            ================================================= */}
-
+            {/* FILTER SIDEBAR */}
             <aside className="hidden lg:block w-[290px] xl:w-[310px] shrink-0 sticky top-24">
-
               <div className="bg-white/90 backdrop-blur-xl rounded-[26px] border border-white shadow-[0_20px_60px_rgba(15,23,42,0.08)] overflow-hidden">
-
                 {/* FILTER HEADER */}
-
                 <div className="px-5 py-5 border-b border-slate-100 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50">
-
                   <div className="flex items-center justify-between">
-
                     <div className="flex items-center gap-3">
-
                       <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg">
                         <Filter className="w-5 h-5 text-white" />
                       </div>
@@ -571,7 +518,6 @@ const JobSeekerDashboard = () => {
                           Refine results
                         </p>
                       </div>
-
                     </div>
 
                     {activeFilterCount > 0 && (
@@ -579,15 +525,11 @@ const JobSeekerDashboard = () => {
                         {activeFilterCount}
                       </span>
                     )}
-
                   </div>
-
                 </div>
 
                 {/* FILTER CONTENT */}
-
                 <div className="max-h-[calc(100vh-120px)] overflow-y-auto p-5">
-
                   <FilterContent
                     toggleSection={toggleSection}
                     clearAllFilters={clearAllFilters}
@@ -595,61 +537,40 @@ const JobSeekerDashboard = () => {
                     filters={filters}
                     handleFilterChange={handleFilterChange}
                   />
-
                 </div>
-
               </div>
-
             </aside>
 
-            {/* =================================================
-                JOB RESULTS
-            ================================================= */}
-
+            {/* JOB RESULTS */}
             <section className="flex-1 min-w-0">
-
               {/* RESULTS HEADER */}
-
               <div className="bg-white/90 backdrop-blur-xl rounded-[24px] border border-white shadow-sm px-5 sm:px-6 py-5 mb-5">
-
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-
                   <div className="flex items-center gap-3">
-
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 text-blue-600 flex items-center justify-center">
-
                       <BriefcaseBusiness className="w-5 h-5" />
-
                     </div>
 
                     <div>
-
                       <div className="flex items-center gap-2">
-
                         <h2 className="text-xl font-black text-slate-900">
                           Available Jobs
                         </h2>
 
                         <span className="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-black">
-                          {jobs.length}
+                          {displayedJobs.length}
                         </span>
-
                       </div>
 
                       <p className="text-sm text-slate-500">
-                        Find the opportunity that fits you best.
+                        Newest jobs are shown first.
                       </p>
-
                     </div>
-
                   </div>
 
                   {/* CONTROLS */}
-
                   <div className="flex items-center gap-2">
-
                     {/* MOBILE FILTER */}
-
                     <button
                       type="button"
                       onClick={() => setShowMobileFilters(true)}
@@ -665,7 +586,6 @@ const JobSeekerDashboard = () => {
                     </button>
 
                     {/* CLEAR */}
-
                     {activeFilterCount > 0 && (
                       <button
                         type="button"
@@ -678,9 +598,7 @@ const JobSeekerDashboard = () => {
                     )}
 
                     {/* GRID / LIST */}
-
                     <div className="flex items-center gap-1 p-1 rounded-xl border border-slate-200 bg-white">
-
                       <button
                         type="button"
                         onClick={() => setViewMode("grid")}
@@ -704,22 +622,15 @@ const JobSeekerDashboard = () => {
                       >
                         <List className="w-4 h-4" />
                       </button>
-
                     </div>
-
                   </div>
-
                 </div>
-
               </div>
 
               {/* ERROR */}
-
               {error && (
                 <div className="mb-5 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700">
-
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-
                     <div>
                       <p className="font-bold text-sm">
                         Something went wrong
@@ -737,24 +648,15 @@ const JobSeekerDashboard = () => {
                     >
                       Retry
                     </button>
-
                   </div>
-
                 </div>
               )}
 
-              {/* =================================================
-                  JOBS
-              ================================================= */}
-
-              {jobs.length === 0 && !loading ? (
-
+              {/* JOBS */}
+              {displayedJobs.length === 0 && !loading ? (
                 <div className="min-h-[450px] rounded-[28px] bg-white/90 border border-white shadow-sm flex flex-col items-center justify-center text-center px-6">
-
                   <div className="w-24 h-24 rounded-[28px] bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
-
                     <Search className="w-10 h-10 text-blue-600" />
-
                   </div>
 
                   <h3 className="mt-6 text-2xl font-black text-slate-900">
@@ -774,11 +676,8 @@ const JobSeekerDashboard = () => {
                     <RotateCcw className="w-4 h-4" />
                     Clear Filters
                   </button>
-
                 </div>
-
               ) : (
-
                 <div
                   className={
                     viewMode === "grid"
@@ -786,22 +685,16 @@ const JobSeekerDashboard = () => {
                       : "flex flex-col gap-5 pb-10"
                   }
                 >
-
-                  {jobs.map((job) => (
-
+                  {displayedJobs.map((job) => (
                     <div
                       key={job._id}
                       className="relative group"
                     >
-
                       {/* GLOW */}
-
                       <div className="absolute -inset-1 rounded-[28px] bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 blur-xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none" />
 
                       {/* JOB CARD */}
-
                       <div className="relative">
-
                         <JobCard
                           job={job}
                           onClick={() =>
@@ -817,31 +710,21 @@ const JobSeekerDashboard = () => {
                             applyToJob(job._id)
                           }
                         />
-
                       </div>
-
                     </div>
-
                   ))}
-
                 </div>
-
               )}
-
             </section>
-
           </div>
-
         </div>
-
       </main>
 
       {/* MOBILE FILTER */}
-
       <MobileFilter />
-
     </div>
   );
 };
 
 export default JobSeekerDashboard;
+

@@ -346,18 +346,37 @@ const UserProfile = () => {
     }
   };
 
-  // =====================================================
-  // APPLICATION HELPERS
-  // =====================================================
+ 
+// =====================================================
+// APPLICATION HELPERS
+// =====================================================
 
-  const getJobTitle = (application) => {
-    return (
-      application?.job?.title ||
-      application?.job?.jobTitle ||
-      application?.jobTitle ||
-      "Job Position"
-    );
-  };
+const getJobTitle = (application) => {
+  let title =
+    application?.job?.title ||
+    application?.job?.jobTitle ||
+    application?.jobTitle ||
+    "Job Position";
+
+  // Convert to string
+  title = String(title).trim();
+
+  // Remove: " - 387"
+  title = title.replace(/\s*-\s*\d+\s*$/g, "");
+
+  // Remove: "#387"
+  title = title.replace(/\s*#\s*\d+\s*$/g, "");
+
+  // Remove: "(387)"
+  title = title.replace(/\s*\(\s*\d+\s*\)\s*$/g, "");
+
+  // Remove any number at the end: "Python Developer 387"
+  title = title.replace(/\s+\d+\s*$/g, "");
+
+  return title.trim();
+};
+
+
 
   const getCompany = (application) => {
     return (
@@ -393,6 +412,41 @@ const UserProfile = () => {
       application?.date
     );
   };
+
+  // =====================================================
+  // SORT APPLICATIONS
+  // MOST RECENTLY APPLIED = #1
+  // =====================================================
+
+  const sortedApplications = useMemo(() => {
+    return [...applications].sort((a, b) => {
+      const dateA = new Date(
+        a?.createdAt ||
+        a?.appliedAt ||
+        a?.appliedDate ||
+        a?.date ||
+        0
+      ).getTime();
+
+      const dateB = new Date(
+        b?.createdAt ||
+        b?.appliedAt ||
+        b?.appliedDate ||
+        b?.date ||
+        0
+      ).getTime();
+
+      // Newest application first
+      if (dateB !== dateA) {
+        return dateB - dateA;
+      }
+
+      // Stable fallback if dates are equal
+      return String(b?._id || "").localeCompare(
+        String(a?._id || "")
+      );
+    });
+  }, [applications]);
 
   // =====================================================
   // STATUS
@@ -2058,7 +2112,7 @@ const UserProfile = () => {
 
                 <div className="space-y-5">
 
-                  {applications.map(
+                  {sortedApplications.map(
                     (application, index) => {
 
                       const jobTitle =
@@ -2183,13 +2237,62 @@ const UserProfile = () => {
 
                                       <Link
                                         to={`/job/${jobId}`}
+                                        className="flex items-center gap-3"
                                       >
-                                        {jobTitle}
+                                        <span
+                                          className="
+                                            inline-flex
+                                            items-center
+                                            justify-center
+                                            min-w-[40px]
+                                            h-8
+                                            px-2
+                                            rounded-lg
+                                            bg-blue-100
+                                            text-blue-700
+                                            text-sm
+                                            font-bold
+                                            shrink-0
+                                          "
+                                          title={`Application #${index + 1}`}
+                                        >
+                                          #{index + 1}
+                                        </span>
+
+                                        <span>
+                                          {jobTitle}
+                                        </span>
                                       </Link>
 
                                     ) : (
 
-                                      jobTitle
+                                      <div className="flex items-center gap-3">
+
+                                        <span
+                                          className="
+                                            inline-flex
+                                            items-center
+                                            justify-center
+                                            min-w-[40px]
+                                            h-8
+                                            px-2
+                                            rounded-lg
+                                            bg-blue-100
+                                            text-blue-700
+                                            text-sm
+                                            font-bold
+                                            shrink-0
+                                          "
+                                          title={`Application #${index + 1}`}
+                                        >
+                                          #{index + 1}
+                                        </span>
+
+                                        <span>
+                                          {jobTitle}
+                                        </span>
+
+                                      </div>
 
                                     )}
 

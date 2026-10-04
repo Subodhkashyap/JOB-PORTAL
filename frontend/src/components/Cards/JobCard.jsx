@@ -114,12 +114,14 @@ const JobCard = ({
     job?.date;
 
   const getInitials = (name) => {
-    return name
-      ?.split(" ")
-      .map((word) => word[0])
-      .join("")
-      .slice(0, 2)
-      .toUpperCase() || "CO";
+    return (
+      name
+        ?.split(" ")
+        .map((word) => word[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase() || "CO"
+    );
   };
 
   return (
@@ -141,11 +143,7 @@ const JobCard = ({
         hover:shadow-[0_25px_70px_rgba(79,70,229,0.16)]
       "
     >
-
-      {/* =====================================================
-          TOP COLOR GLOW
-      ===================================================== */}
-
+      {/* TOP COLOR GLOW */}
       <div
         className="
           absolute
@@ -161,7 +159,6 @@ const JobCard = ({
       />
 
       {/* Hover glow */}
-
       <div
         className="
           absolute
@@ -198,22 +195,15 @@ const JobCard = ({
         "
       />
 
-      {/* =====================================================
-          CARD CONTENT
-      ===================================================== */}
-
+      {/* CARD CONTENT */}
       <div className="relative p-5 sm:p-6">
 
-        {/* ===================================================
-            HEADER
-        =================================================== */}
-
+        {/* HEADER */}
         <div className="flex items-start justify-between gap-4">
 
           <div className="flex items-start gap-4 min-w-0">
 
             {/* Company logo */}
-
             <div
               className="
                 relative
@@ -230,7 +220,6 @@ const JobCard = ({
                 shadow-blue-500/20
               "
             >
-
               <div
                 className="
                   w-full
@@ -240,11 +229,8 @@ const JobCard = ({
                   flex
                   items-center
                   justify-center
-                  text-transparent
-                  bg-clip-text
                 "
               >
-
                 <span
                   className="
                     text-lg
@@ -258,15 +244,11 @@ const JobCard = ({
                 >
                   {getInitials(companyName)}
                 </span>
-
               </div>
-
             </div>
 
             {/* Job title */}
-
             <div className="min-w-0">
-
               <h3
                 onClick={onClick}
                 className="
@@ -281,32 +263,30 @@ const JobCard = ({
                   truncate
                 "
               >
+                {/* ONLY JOB TITLE — NO NUMBER */}
                 {job?.title || "Software Developer"}
               </h3>
 
-              <div className="
-                flex
-                items-center
-                gap-2
-                mt-2
-                text-sm
-                text-slate-500
-              ">
-
+              <div
+                className="
+                  flex
+                  items-center
+                  gap-2
+                  mt-2
+                  text-sm
+                  text-slate-500
+                "
+              >
                 <Building2 className="w-4 h-4 text-indigo-500" />
 
                 <span className="truncate">
                   {companyName}
                 </span>
-
               </div>
-
             </div>
-
           </div>
 
           {/* Bookmark */}
-
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -329,9 +309,12 @@ const JobCard = ({
               hover:bg-blue-50
               hover:scale-105
             "
-            title={isSaved ? "Remove bookmark" : "Save job"}
+            title={
+              isSaved
+                ? "Remove bookmark"
+                : "Save job"
+            }
           >
-
             {isSaved ? (
               <BookmarkCheck
                 className="
@@ -351,267 +334,262 @@ const JobCard = ({
                 "
               />
             )}
-
           </button>
-
         </div>
 
-        {/* ===================================================
-            TAGS
-        =================================================== */}
-
-        <div className="
-          flex
-          flex-wrap
-          items-center
-          gap-2
-          mt-5
-        ">
-
-          <span className="
-            inline-flex
+        {/* TAGS */}
+        <div
+          className="
+            flex
+            flex-wrap
             items-center
-            px-3
-            py-1.5
-            rounded-full
-            bg-blue-50
-            text-blue-700
-            border
-            border-blue-100
-            text-xs
-            font-bold
-          ">
-            {jobType}
-          </span>
-
-          <span className="
-            inline-flex
-            items-center
-            px-3
-            py-1.5
-            rounded-full
-            bg-purple-50
-            text-purple-700
-            border
-            border-purple-100
-            text-xs
-            font-bold
-          ">
-            {category}
-          </span>
-
-          {job?.workMode && (
-            <span className="
+            gap-2
+            mt-5
+          "
+        >
+          <span
+            className="
               inline-flex
               items-center
               px-3
               py-1.5
               rounded-full
-              bg-cyan-50
-              text-cyan-700
+              bg-blue-50
+              text-blue-700
               border
-              border-cyan-100
+              border-blue-100
               text-xs
               font-bold
-            ">
+            "
+          >
+            {jobType}
+          </span>
+
+          <span
+            className="
+              inline-flex
+              items-center
+              px-3
+              py-1.5
+              rounded-full
+              bg-purple-50
+              text-purple-700
+              border
+              border-purple-100
+              text-xs
+              font-bold
+            "
+          >
+            {category}
+          </span>
+
+          {job?.workMode && (
+            <span
+              className="
+                inline-flex
+                items-center
+                px-3
+                py-1.5
+                rounded-full
+                bg-cyan-50
+                text-cyan-700
+                border
+                border-cyan-100
+                text-xs
+                font-bold
+              "
+            >
               {job.workMode}
             </span>
           )}
-
         </div>
 
-        {/* ===================================================
-            INFO
-        =================================================== */}
-
-        <div className="
-          grid
-          grid-cols-1
-          sm:grid-cols-2
-          gap-3
-          mt-5
-        ">
-
-          <div className="
-            flex
-            items-center
-            gap-2.5
-            rounded-xl
-            bg-slate-50
-            px-3
-            py-2.5
-            border
-            border-slate-100
-          ">
-
-            <div className="
-              w-8
-              h-8
-              rounded-lg
-              bg-blue-100
+        {/* INFO */}
+        <div
+          className="
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            gap-3
+            mt-5
+          "
+        >
+          {/* Location */}
+          <div
+            className="
               flex
               items-center
-              justify-center
-            ">
-
-              <MapPin className="
-                w-4
-                h-4
-                text-blue-600
-              " />
-
+              gap-2.5
+              rounded-xl
+              bg-slate-50
+              px-3
+              py-2.5
+              border
+              border-slate-100
+            "
+          >
+            <div
+              className="
+                w-8
+                h-8
+                rounded-lg
+                bg-blue-100
+                flex
+                items-center
+                justify-center
+              "
+            >
+              <MapPin className="w-4 h-4 text-blue-600" />
             </div>
 
             <div className="min-w-0">
-
-              <p className="
-                text-[10px]
-                uppercase
-                tracking-wider
-                text-slate-400
-                font-bold
-              ">
+              <p
+                className="
+                  text-[10px]
+                  uppercase
+                  tracking-wider
+                  text-slate-400
+                  font-bold
+                "
+              >
                 Location
               </p>
 
-              <p className="
-                text-xs
-                font-semibold
-                text-slate-700
-                truncate
-              ">
+              <p
+                className="
+                  text-xs
+                  font-semibold
+                  text-slate-700
+                  truncate
+                "
+              >
                 {location}
               </p>
-
             </div>
-
           </div>
 
-          <div className="
-            flex
-            items-center
-            gap-2.5
-            rounded-xl
-            bg-slate-50
-            px-3
-            py-2.5
-            border
-            border-slate-100
-          ">
-
-            <div className="
-              w-8
-              h-8
-              rounded-lg
-              bg-purple-100
+          {/* Posted Date */}
+          <div
+            className="
               flex
               items-center
-              justify-center
-            ">
-
-              <CalendarDays className="
-                w-4
-                h-4
-                text-purple-600
-              " />
-
+              gap-2.5
+              rounded-xl
+              bg-slate-50
+              px-3
+              py-2.5
+              border
+              border-slate-100
+            "
+          >
+            <div
+              className="
+                w-8
+                h-8
+                rounded-lg
+                bg-purple-100
+                flex
+                items-center
+                justify-center
+              "
+            >
+              <CalendarDays className="w-4 h-4 text-purple-600" />
             </div>
 
             <div>
+              <p
+                className="
+                  text-[10px]
+                  uppercase
+                  tracking-wider
+                  text-slate-400
+                  font-bold
+                "
+              >
+                Posted
+              </p>
 
-              <p className="
-                text-[10px]
+              <p
+                className="
+                  text-xs
+                  font-semibold
+                  text-slate-700
+                "
+              >
+                {formatDate(postedDate)}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* BOTTOM */}
+        <div
+          className="
+            flex
+            flex-col
+            sm:flex-row
+            sm:items-end
+            sm:justify-between
+            gap-4
+            mt-6
+            pt-5
+            border-t
+            border-slate-100
+          "
+        >
+          {/* Salary */}
+          <div>
+            <p
+              className="
+                text-[11px]
                 uppercase
                 tracking-wider
                 text-slate-400
                 font-bold
-              ">
-                Posted
-              </p>
-
-              <p className="
-                text-xs
-                font-semibold
-                text-slate-700
-              ">
-                {formatDate(postedDate)}
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* ===================================================
-            BOTTOM
-        =================================================== */}
-
-        <div className="
-          flex
-          flex-col
-          sm:flex-row
-          sm:items-end
-          sm:justify-between
-          gap-4
-          mt-6
-          pt-5
-          border-t
-          border-slate-100
-        ">
-
-          {/* Salary */}
-
-          <div>
-
-            <p className="
-              text-[11px]
-              uppercase
-              tracking-wider
-              text-slate-400
-              font-bold
-            ">
+              "
+            >
               Salary
             </p>
 
-            <p className="
-              mt-1
-              text-xl
-              font-black
-              bg-gradient-to-r
-              from-blue-600
-              to-purple-600
-              bg-clip-text
-              text-transparent
-            ">
+            <p
+              className="
+                mt-1
+                text-xl
+                font-black
+                bg-gradient-to-r
+                from-blue-600
+                to-purple-600
+                bg-clip-text
+                text-transparent
+              "
+            >
               {salary}
             </p>
-
           </div>
 
           {/* Status / Apply */}
-
-          <div className="
-            flex
-            items-center
-            gap-3
-          ">
-
+          <div
+            className="
+              flex
+              items-center
+              gap-3
+            "
+          >
             {statusStyle ? (
-
-              <div className={`
-                inline-flex
-                items-center
-                gap-1.5
-                px-3
-                py-2
-                rounded-xl
-                border
-                text-xs
-                font-bold
-                ${statusStyle.wrapper}
-              `}>
-
+              <div
+                className={`
+                  inline-flex
+                  items-center
+                  gap-1.5
+                  px-3
+                  py-2
+                  rounded-xl
+                  border
+                  text-xs
+                  font-bold
+                  ${statusStyle.wrapper}
+                `}
+              >
                 <span
                   className={`
                     w-1.5
@@ -626,11 +604,8 @@ const JobCard = ({
                 <span className="capitalize">
                   {status}
                 </span>
-
               </div>
-
             ) : (
-
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -660,7 +635,6 @@ const JobCard = ({
                   transition-all
                 "
               >
-
                 <BriefcaseBusiness className="w-4 h-4" />
 
                 Apply Now
@@ -674,17 +648,11 @@ const JobCard = ({
                     group-hover/apply:-translate-y-0.5
                   "
                 />
-
               </button>
-
             )}
-
           </div>
-
         </div>
-
       </div>
-
     </article>
   );
 };
