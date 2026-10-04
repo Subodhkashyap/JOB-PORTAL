@@ -23,7 +23,12 @@ app.use(
         allowedHeaders: ["Content-Type", "Authorization"],
     })
 )
-
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Job Portal Backend API is running 🚀"
+  });
+});
 // Connect to the database
 connectDB();
 
