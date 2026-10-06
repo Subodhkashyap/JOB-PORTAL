@@ -18,7 +18,7 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-8.19-47A248.svg)](https://mongodb.com/)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
-[![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen.svg)](https://github.com/Abhay-0103/Job-Portal-Project/graphs/commit-activity)
+[![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen.svg)](https://github.com/Subodh-0103/Job-Portal-Project/graphs/commit-activity)
 
 [Funcionalidades](#-funcionalidades) • [Instalación](#-instalación) • [Documentación](#-documentacion-de-la-api) • [Contribución](#-contribucion)
 
@@ -30,7 +30,7 @@
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/Abhay-0103/Job-Portal-Project.git
+git clone https://github.com/Subodh-0103/Job-Portal-Project.git
 cd Job-Portal-Project
 
 # Configuración del Backend
@@ -456,7 +456,7 @@ Asegúrate de tener lo siguiente instalado en tu sistema:
 ### Paso 1: Clonar el repositorio
 
 ```bash
-git clone https://github.com/Abhay-0103/Job-Portal-Project.git
+git clone https://github.com/Subodh-0103/Job-Portal-Project.git
 cd Job-Portal-Project
 ```
 
@@ -1059,7 +1059,7 @@ sudo npm install -g pm2
 3. **Desplegar aplicación:**
 ```bash
 # Clonar repositorio
-git clone https://github.com/Abhay-0103/Job-Portal-Project.git
+git clone https://github.com/Subodh-0103/Job-Portal-Project.git
 cd Job-Portal-Project/backend
 
 # Instalar dependencias
@@ -1488,7 +1488,7 @@ R: ¡Sí! Lee la sección de Contribución y envía PRs.
 
 ## 🐛 Problemas conocidos
 
-- Ninguno por el momento. Reporta problemas [aquí](https://github.com/Abhay-0103/Job-Portal-Project/issues)
+- Ninguno por el momento. Reporta problemas [aquí](https://github.com/Subodh-0103/Job-Portal-Project/issues)
 
 ---
 
@@ -1561,13 +1561,13 @@ Ejemplos:
 
 <div align="center">
 
-### Abhay Singh
+### Subodh Kashyap
 
-[![GitHub](https://img.shields.io/badge/GitHub-@Abhay--0103-181717?style=for-the-badge&logo=github)](https://github.com/Abhay-0103)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/abhay-singh-16a492329)
+[![GitHub](https://img.shields.io/badge/GitHub-@Subodh--0103-181717?style=for-the-badge&logo=github)](https://github.com/Subodh-0103)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/Subodh-singh-16a492329)
 [![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](ab0321054@gmail.com)
 
-**Repositorio:** [Job-Portal-Project](https://github.com/Abhay-0103/Job-Portal-Project)
+**Repositorio:** [Job-Portal-Project](https://github.com/Subodh-0103/Job-Portal-Project)
 
 </div>
 
@@ -1866,9 +1866,9 @@ Ejemplos:
 Si tienes preguntas o necesitas ayuda con el proyecto:
 
 - 📧 **Correo**: [ab0321054@gmail.com](mailto:ab0321054@gmail.com)
-- 🐛 **Reportar problemas**: [Issues de GitHub](https://github.com/Abhay-0103/Job-Portal-Project/issues)
-- 💬 **Discusiones**: [Discusiones de GitHub](https://github.com/Abhay-0103/Job-Portal-Project/discussions)
-- 💼 **LinkedIn**: [Abhay Singh](https://linkedin.com/in/abhay-singh-16a492329)
+- 🐛 **Reportar problemas**: [Issues de GitHub](https://github.com/Subodh-0103/Job-Portal-Project/issues)
+- 💬 **Discusiones**: [Discusiones de GitHub](https://github.com/Subodh-0103/Job-Portal-Project/discussions)
+- 💼 **LinkedIn**: [Subodh Kashyap](https://linkedin.com/in/Subodh-singh-16a492329)
 
 ### Obteniendo ayuda
 
@@ -1931,13 +1931,13 @@ Si tienes preguntas o necesitas ayuda con el proyecto:
 
 ### 📈 Estadísticas de GitHub
 
-![GitHub stars](https://img.shields.io/github/stars/Abhay-0103/Job-Portal-Project?style=social)
-![GitHub forks](https://img.shields.io/github/forks/Abhay-0103/Job-Portal-Project?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/Abhay-0103/Job-Portal-Project?style=social)
+![GitHub stars](https://img.shields.io/github/stars/Subodh-0103/Job-Portal-Project?style=social)
+![GitHub forks](https://img.shields.io/github/forks/Subodh-0103/Job-Portal-Project?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/Subodh-0103/Job-Portal-Project?style=social)
 
 ---
 
-Hecho con ❤️ por [Abhay Singh](https://github.com/Abhay-0103)
+Hecho con ❤️ por [Subodh Kashyap](https://github.com/Subodh-0103)
 
 **© 2025 Job Portal - Proyecto BTI College. Todos los derechos reservados.**
 

@@ -30,7 +30,7 @@ const Footer = () => {
                 reserved.
               </p>
               <p className={`text-sm text-gray-500`}>
-                Made with ❤️ by Abhay Singh
+                Made with ❤️ by Subodh Kashyap
               </p>
             </div>
           </div>
